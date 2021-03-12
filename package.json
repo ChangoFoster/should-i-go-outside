@@ -8,6 +8,7 @@
     "start": "npm --prefix server run start",
     "start:dev": "concurrently --kill-others \"npm --prefix server run dev\" \"npm --prefix client start\"",
     "build": "npm --prefix client run build --prod",
+    "postinstall": "npm --prefix client install && npm --prefix server install",
     "deploy": "git push heroku main",
     "deploy:full": "npm run build && git add . && git commit -m build && npm run deploy"
   },

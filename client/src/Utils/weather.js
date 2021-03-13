@@ -27,7 +27,14 @@ const toWeatherArray = (weatherArray) => {
 }
 
 const toWeather = (object) => {
-    if (!object.weather_state_abbr || !object.the_temp || !object.wind_speed) {
+    if (
+        !object.id 
+        || object.applicable_date 
+        || !object.weather_state_abbr 
+        || !object.weather_state_name 
+        || !object.the_temp 
+        || !object.wind_speed
+    ) {
         throw new Error(`Weather missing key attributes: ${weather}`)
     }
 

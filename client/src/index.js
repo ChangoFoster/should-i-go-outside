@@ -2,12 +2,15 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
+import { WeatherProvider } from './Utils/useWeather'
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  <WeatherProvider>
+    <React.StrictMode>
+      <App />
+    </React.StrictMode>
+  </WeatherProvider>,
   document.getElementById('root')
 );
 

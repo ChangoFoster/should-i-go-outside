@@ -1,17 +1,15 @@
-import React from 'react';
+import React from 'react'
 import propTypes from 'prop-types'
 
-Recommendation.propTypes = {
-    the_temp: propTypes.number,
-    weather_state_abbr: propTypes.string,
-    wind_speed: propTypes.number
-}
+import useWeather from '../Utils/useWeather'
 
 const Recommendation = ({ the_temp, weather_state_abbr, wind_speed }) => {
-    if (!the_temp || !weather_state_abbr || !wind_speed) {
+    const { locationEnabled } = useWeather()
+
+    if (!the_temp || !weather_state_abbr || !wind_speed || !locationEnabled) {
         return (
             <div className="recommendation">
-                Allow location access we will tell you what its like out there
+                <p>Allow location access we will tell you what its like out there</p>
             </div>
         )
     }
@@ -26,6 +24,12 @@ const Recommendation = ({ the_temp, weather_state_abbr, wind_speed }) => {
             </ul>
         </div>
     )
+}
+
+Recommendation.propTypes = {
+    the_temp: propTypes.number,
+    weather_state_abbr: propTypes.string,
+    wind_speed: propTypes.number
 }
 
 export default Recommendation

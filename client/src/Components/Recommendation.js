@@ -1,10 +1,17 @@
 import React from 'react';
+import propTypes from 'prop-types'
+
+Recommendation.propTypes = {
+    the_temp: propTypes.number,
+    weather_state_abbr: propTypes.string,
+    wind_speed: propTypes.number
+}
 
 const Recommendation = ({ the_temp, weather_state_abbr, wind_speed }) => {
     if (!the_temp || !weather_state_abbr || !wind_speed) {
         return (
             <div className="recommendation">
-                Allow location access we'll tell you what it's like out there
+                Allow location access we will tell you what its like out there
             </div>
         )
     }

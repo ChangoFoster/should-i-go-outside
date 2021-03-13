@@ -3,7 +3,7 @@ const router = express.Router();
 const axios = require('axios');
 const { weatherUrl } = require('../utils/consts')
 
-router.get('/',  async (req, res, next) => {
+router.get('/',  async (req, res) => {
   const { latt, long } = req.query
 
   console.log('ding')

@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "start": "NODE_ENV=production node index.js",
-    "dev": "NODE_ENV=development nodemon index.js"
+    "dev": "NODE_ENV=development nodemon index.js",
+    "lint": "yarn run eslint ."
   },
   "dependencies": {
     "axios": "^0.21.1",
@@ -21,6 +22,9 @@
     "request": "^2.88.2"
   },
   "engines": {
-    "node": "10.15.x"
+    "node": "10.19.x"
+  },
+  "devDependencies": {
+    "eslint": "^7.22.0"
   }
 }

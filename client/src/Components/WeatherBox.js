@@ -10,20 +10,14 @@ const WeatherBox = (day) => {
 
     return (
         <div className="weatherBox">
-            <h3>
-                {day.applicable_date}
-            </h3>
+            <h3>{day.applicable_date}</h3>
             <Recommendation {...day} />
             <img 
-                src={`${imgUrl}/${day.weather_state_abbr}.svg`} 
-                alt={day.weather_state_name} 
+                src={`${imgUrl}/${day.type}.svg`} 
+                alt={day.name} 
             />
-            <p>
-                {day.weather_state_name} {Math.round(day.the_temp)}&ordm;C
-            </p>
-            <p>
-                {Math.round(day.wind_speed)} mph winds
-            </p>
+            <p>{day.name} {Math.round(day.temp)}&ordm;C</p>
+            <p>{Math.round(day.wind)} mph winds</p>
         </div>
     )
 }

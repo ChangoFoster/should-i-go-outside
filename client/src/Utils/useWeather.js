@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import axios from 'axios'
+
+import * as weatherService from './weather'
 import useCurrentLocation from './useCurrentLocation'
 
 const WeatherContext = React.createContext()
@@ -14,18 +15,17 @@ export const WeatherProvider = (props) => {
             console.log('Location not enabled')
             return undefined
         }
-
-        axios.get('/weather/', {
-            params: {
-                latt: Math.round(currentLocation.latitude),
-                long: Math.round(currentLocation.longitude)  
+        const fetchWeather = async () => {
+            try {
+                const weather = await weatherService.getWeather(currentLocation)
+                setToday(weather[0])
+                setFiveDay(weather)
+            } catch (error) {
+                console.log(error)
             }
-        })
-            .then(response => {
-                setFiveDay(response.data.consolidated_weather)
-                setToday(response.data.consolidated_weather[0])
-            })
-            .catch(error => console.log(error))
+        }
+
+        fetchWeather()
     }, [currentLocation])
 
     return (

@@ -29,7 +29,7 @@ const toWeatherArray = (weatherArray) => {
 const toWeather = (object) => {
     if (
         !object.id 
-        || object.applicable_date 
+        || !object.applicable_date 
         || !object.weather_state_abbr 
         || !object.weather_state_name 
         || !object.the_temp 

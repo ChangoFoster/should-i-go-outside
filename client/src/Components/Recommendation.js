@@ -4,7 +4,15 @@ import propTypes from 'prop-types'
 import useWeather from '../Utils/useWeather'
 
 const Recommendation = ({ temp, type, wind }) => {
-  const { locationEnabled } = useWeather()
+  const { loading, locationEnabled } = useWeather()
+
+  if (loading) {
+    return (
+      <div className="recommendaton">
+        <p>Loading weather...</p>
+      </div>
+    )
+  }
 
   if (!temp || !type || !wind || !locationEnabled) {
     return (

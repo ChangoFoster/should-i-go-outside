@@ -10,23 +10,28 @@ export const WeatherProvider = (props) => {
     location: currentLocation,
     locationEnabled,
     getLocation,
+    permissionDesc
   } = useCurrentLocation()
+  const [loading, setLoading] = useState()
   const [today, setToday] = useState()
   const [fiveDay, setFiveDay] = useState()
+  const [error, setError] = useState()
 
   useEffect(() => {
     if (!currentLocation) {
-      console.log('Location not enabled')
       return undefined
     }
 
     const fetchWeather = async () => {
       try {
+        setLoading(true)
         const weather = await weatherService.getWeather(currentLocation)
         setToday(weather[0])
         setFiveDay(weather)
+        setLoading(false)
       } catch (error) {
-        console.log(error)
+        setError(String(error))
+        setLoading(false)
       }
     }
 
@@ -35,7 +40,7 @@ export const WeatherProvider = (props) => {
 
   return (
     <WeatherContext.Provider
-      value={{ today, fiveDay, currentLocation, locationEnabled, getLocation }}
+      value={{ today, fiveDay, loading, error, locationEnabled, getLocation, permissionDesc }}
       {...props}
     />
   )

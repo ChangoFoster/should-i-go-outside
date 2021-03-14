@@ -1,21 +1,32 @@
 .theme_1 {
-  background-color: #FFA8A8;
+  background-color: #E3943B;
 }
 
 .theme_2 {
-  background-color: #FFCFA8;
+  background-color: #2FB62F;
 }
 
 .theme_3 {
-  background-color: #6BA3A3;
+  background-color: #E33B3B;
+}
+
+.theme_3 a:any-link {
+  color: darkblue;
 }
 
 .theme_4 {
-  background-color: #8AD18A;
+  background-color: #64319A;
+}
+
+.theme_4 a:any-link {
+  color:lightgreen;
 }
 
 .App {
+  color: white;
+  font-family: Helvetica, sans-serif;
   text-align: center;
+  text-shadow: 2px 2px 5px darkgray;
 }
 
 main {

@@ -5,14 +5,14 @@ import useWeather from '../Utils/useWeather'
 import Recommendation from './Recommendation'
 
 const Answer = () => {
-    const { today } = useWeather()
+  const { today } = useWeather()
 
-    return (
+  return (
     <div className="answer">
-        <h1>Yes!</h1>
-        <Recommendation {...today} />
+      <h1>Yes!</h1>
+      <Recommendation {...today} />
     </div>
-    )
+  )
 }
 
 export default Answer

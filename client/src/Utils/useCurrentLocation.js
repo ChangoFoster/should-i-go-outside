@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect } from 'react'
 
 const useCurrentLocation = () => {
   const [location, setLocation] = useState()
@@ -18,38 +18,31 @@ const useCurrentLocation = () => {
   const getLocation = () => {
     const { geolocation } = navigator
 
-    geolocation.getCurrentPosition(
-        handleSuccess, 
-        handleError, 
-        {
-            enableHighAccuracy: false,
-            timeout: 1000 * 60 * 1, // 1 min (1000 ms * 60 sec * 1 minute = 60 000ms)
-            maximumAge: 1000 * 3600 * 24, // 24 hour
-        }
-    )
+    geolocation.getCurrentPosition(handleSuccess, handleError, {
+      enableHighAccuracy: false,
+      timeout: 1000 * 60 * 1, // 1 min (1000 ms * 60 sec * 1 minute = 60 000ms)
+      maximumAge: 1000 * 3600 * 24, // 24 hour
+    })
   }
 
   useEffect(() => {
-    navigator.permissions.query({ name: 'geolocation' })
-      .then((result) => {
+    navigator.permissions.query({ name: 'geolocation' }).then((result) => {
+      setLocationEnabled(result.state === 'granted' ? true : false)
+      result.onchange = () => {
         setLocationEnabled(result.state === 'granted' ? true : false)
-        result.onchange = () => { setLocationEnabled(result.state === 'granted' ? true : false) }
-      })  
+      }
+    })
   }, [])
 
   useEffect(() => {
     if (locationEnabled) {
       const { geolocation } = navigator
 
-      geolocation.getCurrentPosition(
-          handleSuccess, 
-          handleError, 
-          {
-              enableHighAccuracy: false,
-              timeout: 1000 * 60 * 1, // 1 min (1000 ms * 60 sec * 1 minute = 60 000ms)
-              maximumAge: 1000 * 3600 * 24, // 24 hour
-          }
-      )
+      geolocation.getCurrentPosition(handleSuccess, handleError, {
+        enableHighAccuracy: false,
+        timeout: 1000 * 60 * 1, // 1 min (1000 ms * 60 sec * 1 minute = 60 000ms)
+        maximumAge: 1000 * 3600 * 24, // 24 hour
+      })
     }
   }, [locationEnabled])
 

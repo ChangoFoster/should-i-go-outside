@@ -16,7 +16,7 @@ function App() {
         <MentalHealth />
         <FiveDay />
       </main>
-      <Footer />      
+      <Footer />
     </div>
   )
 }

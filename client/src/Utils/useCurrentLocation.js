@@ -4,6 +4,7 @@ const useCurrentLocation = () => {
   const [location, setLocation] = useState()
   const [error, setError] = useState()
   const [locationEnabled, setLocationEnabled] = useState()
+  const [permissionDesc, setPermissionDesc] = useState()
 
   const handleSuccess = (position) => {
     const { latitude, longitude } = position.coords
@@ -28,8 +29,10 @@ const useCurrentLocation = () => {
   useEffect(() => {
     navigator.permissions.query({ name: 'geolocation' }).then((result) => {
       setLocationEnabled(result.state === 'granted' ? true : false)
+      setPermissionDesc(result.state)
       result.onchange = () => {
         setLocationEnabled(result.state === 'granted' ? true : false)
+        setPermissionDesc(result.state)
       }
     })
   }, [])
@@ -46,7 +49,7 @@ const useCurrentLocation = () => {
     }
   }, [locationEnabled])
 
-  return { location, error, locationEnabled, getLocation }
+  return { location, error, locationEnabled, getLocation, permissionDesc }
 }
 
 export default useCurrentLocation

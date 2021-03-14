@@ -2,6 +2,10 @@
   background-color: #E3943B;
 }
 
+.theme_1 a:any-link {
+  color:darkviolet;
+}
+
 .theme_2 {
   background-color: #2FB62F;
 }

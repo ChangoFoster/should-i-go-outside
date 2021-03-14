@@ -1,8 +1,8 @@
-import React from 'react'
+import React, { Suspense } from 'react'
 import './App.css'
 
 import Answer from './Components/Answer'
-import FiveDay from './Components/FiveDay'
+const FiveDay = React.lazy(() => import('./Components/FiveDay'))
 import Footer from './Components/Footer'
 import LocationButton from './Components/LocationButton'
 import MentalHealth from './Components/MentalHealth'
@@ -14,7 +14,9 @@ function App() {
         <Answer />
         <LocationButton />
         <MentalHealth />
-        <FiveDay />
+        <Suspense fallback={null}>
+          <FiveDay />
+        </Suspense>
       </main>
       <Footer />
     </div>

@@ -1,5 +1,4 @@
-* Add typescript to client
-* Add typescript to server
-* Email the MetaWeather guy
+* Sort out weather hook/location hook
+* Contact MetaWeather
 * Get domain
 * Configure cloudflare

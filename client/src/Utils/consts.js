@@ -1,4 +1,3 @@
-const geolocationHook = 'https://github.com/NorbertB29/geolocation-api-hook'
 const githubProfile = 'https://github.com/ChangoFoster'
 const imgUrl = 'https://www.metaweather.com/static/img/weather'
 const mentalHealthUrl =
@@ -6,7 +5,6 @@ const mentalHealthUrl =
 const weatherProvider = 'https://www.metaweather.com'
 
 export {
-  geolocationHook,
   githubProfile,
   imgUrl,
   mentalHealthUrl,

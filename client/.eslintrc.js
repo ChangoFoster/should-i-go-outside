@@ -4,11 +4,15 @@ module.exports = {
     es2021: true,
     node: true,
     es6: true,
+    'jest/globals': true
   },
   extends: [
     'eslint:recommended',
     'plugin:react/recommended',
     'plugin:react-hooks/recommended',
+    'plugin:jest/recommended',
+    'plugin:jest/style',
+    'plugin:jest/all'
   ],
   parserOptions: {
     ecmaFeatures: {
@@ -17,7 +21,7 @@ module.exports = {
     ecmaVersion: 12,
     sourceType: 'module',
   },
-  plugins: ['react'],
+  plugins: ['react', 'jest'],
   rules: {
     indent: [
       'error',

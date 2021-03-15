@@ -5,9 +5,9 @@ import useWeather from '../Utils/useWeather'
 import WeatherBox from './WeatherBox'
 
 const FiveDay = () => {
-  const { fiveDay } = useWeather()
+  const { fiveDay, locationEnabled } = useWeather()
 
-  if (!fiveDay) {
+  if (!fiveDay || !locationEnabled) {
     return null
   }
   return (

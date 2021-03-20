@@ -8,7 +8,7 @@ const MentalHealth = () => (
       <a href={mentalHealthUrl} alt="mental health resource">
         help keep you mentally fit
       </a>
-      . Stick to your countries COVID rules. We will get through this.
+      . Stick to your local COVID rules. We will get through this.
     </p>
   </div>
 )

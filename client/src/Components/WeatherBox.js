@@ -10,7 +10,7 @@ const WeatherBox = (day) => {
 
   return (
     <div className="weatherBox">
-      <h3>{day.applicable_date}</h3>
+      <h3>{day.date}</h3>
       <Recommendation {...day} />
       <img src={`${imgUrl}/${day.type}.svg`} alt={day.name} />
       <p>

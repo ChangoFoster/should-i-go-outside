@@ -10,7 +10,7 @@ const pingRouter = require('./routes/ping')
 const weatherRouter = require('./routes/weather')
 
 const app = express()
-app.use(helmet())
+app.use(helmet({ contentSecurityPolicy: false }))
 app.use(cors())
 app.use(express.static(path.join(__dirname, '..', 'client', 'build')))
 
@@ -23,7 +23,7 @@ app.use(cookieParser())
 app.use((_req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*")
   res.header(
-    'Content-Security-Policy',
+    'Content-Security-Policy-Report-Only',
     "default-src 'self' data:; font-src 'self'; img-src 'self' data: https://www.metaweather.com/static/img/weather; manifest-src 'self'; script-src 'self'; style-src 'self'; frame-src 'self'"
   )
   next()

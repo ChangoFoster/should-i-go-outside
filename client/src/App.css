@@ -45,6 +45,10 @@ main {
   margin: 0;
 }
 
+.App button {
+  padding: 1vw;
+}
+
 .answer {
   align-items: center;
   display: flex;

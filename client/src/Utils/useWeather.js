@@ -10,7 +10,7 @@ export const WeatherProvider = (props) => {
     location: currentLocation,
     locationEnabled,
     getLocation,
-    permissionDesc
+    permissionDesc,
   } = useCurrentLocation()
   const [loading, setLoading] = useState()
   const [today, setToday] = useState()
@@ -40,7 +40,15 @@ export const WeatherProvider = (props) => {
 
   return (
     <WeatherContext.Provider
-      value={{ today, fiveDay, loading, error, locationEnabled, getLocation, permissionDesc }}
+      value={{
+        today,
+        fiveDay,
+        loading,
+        error,
+        locationEnabled,
+        getLocation,
+        permissionDesc,
+      }}
       {...props}
     />
   )

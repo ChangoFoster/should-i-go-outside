@@ -9,7 +9,7 @@ import MentalHealth from './Components/MentalHealth'
 
 function App() {
   return (
-    <div className={`App theme_${Math.floor(Math.random() * 4) + 1}`}>
+    <div className={`App theme_${Math.floor(Math.random() * 5) + 1}`}>
       <main>
         <Answer />
         <LocationButton />

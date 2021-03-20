@@ -24,7 +24,7 @@ app.use((_req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*")
   res.setHeader(
     'Content-Security-Policy-Report-Only',
-    "default-src 'self'; font-src 'self'; img-src 'self'; script-src 'self'; style-src 'self'; frame-src 'self'"
+    "default-src 'self' data:; font-src 'self'; img-src 'self' data: https://www.metaweather.com/static/img/weather; manifest-src 'self'; script-src 'self'; style-src 'self'; frame-src 'self'"
   )
   next()
 })

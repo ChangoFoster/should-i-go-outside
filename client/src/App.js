@@ -2,10 +2,11 @@ import React, { Suspense } from 'react'
 import './App.css'
 
 import Answer from './Components/Answer'
-const FiveDay = React.lazy(() => import('./Components/FiveDay'))
 import Footer from './Components/Footer'
 import LocationButton from './Components/LocationButton'
 import MentalHealth from './Components/MentalHealth'
+
+const FiveDay = React.lazy(() => import('./Components/FiveDay'))
 
 function App() {
   return (

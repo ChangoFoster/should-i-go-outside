@@ -29,8 +29,8 @@ app.use((_req, res, next) => {
   next()
 })
 
-app.use('/ping', pingRouter);
-app.use('/weather', weatherRouter);
+app.use('/ping', pingRouter)
+app.use('/weather', weatherRouter)
 
 app.get('*', (_req, res) => {
   res.sendFile(path.json(__dirname, '..', 'client', 'build', 'index.html'))
@@ -38,8 +38,8 @@ app.get('*', (_req, res) => {
 
 // catch 404 and forward to error handler
 app.use(function(_req, _res, next) {
-  next(createError(404));
-});
+  next(createError(404))
+})
 
 // error handler
 app.use((err, req, res) => {
@@ -49,6 +49,6 @@ app.use((err, req, res) => {
 
   res.status(err.status || 500)
   res.render('error')
-});
+})
 
-module.exports = app;
+module.exports = app

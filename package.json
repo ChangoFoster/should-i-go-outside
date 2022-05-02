@@ -15,9 +15,9 @@
   "author": "ChangoFoster",
   "license": "MIT",
   "dependencies": {
-    "concurrently": "^6.5.1"
+    "concurrently": "^7.1.0"
   },
   "engines": {
-    "node": "16.13.x"
+    "node": "16.15.x"
   }
 }

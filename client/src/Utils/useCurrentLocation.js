@@ -12,19 +12,21 @@ const useCurrentLocation = () => {
     maximumAge: 1000 * 3600 * 24, // 24 hour
   }), [])
 
-  const handleSuccess = (position) => {
-    const { latitude, longitude } = position.coords
-    setLocation({ latitude, longitude })
-  }
+  const handleSuccess = useCallback((position) => {
+    if (position?.coords) {
+      const { latitude, longitude } = position.coords
+      setLocation({ latitude, longitude })
+    }
+  }, [])
 
-  const handleError = (error) => {
-    setError(error.message)
-  }
+  const handleError = useCallback((error) => {
+    setError(error?.message)
+  }, [])
 
-  const handleUpdateLocation = (state) => {
+  const handleUpdateLocation = useCallback((state) => {
     setLocationEnabled(state === 'granted' ? true : false)
     setPermissionDesc(state)
-  }
+  }, [])
 
   const getLocation = useCallback(() => {
     navigator.geolocation.getCurrentPosition(
@@ -32,16 +34,21 @@ const useCurrentLocation = () => {
       handleError,
       options
     )
-  }, [options])
+  }, [handleError, handleSuccess, options])
 
   useEffect(() => {
     navigator.permissions.query({ name: 'geolocation' }).then((result) => {
-      handleUpdateLocation(result.state)
+      handleUpdateLocation(result?.state)
       result.onchange = () => {
-        handleUpdateLocation(result.state)
+        handleUpdateLocation(result?.state)
       }
     })
-  }, [])
+
+    return () => {
+      setLocationEnabled(false)
+      setPermissionDesc('denied')
+    }
+  }, [handleUpdateLocation])
 
   useEffect(() => {
     if (locationEnabled) getLocation()

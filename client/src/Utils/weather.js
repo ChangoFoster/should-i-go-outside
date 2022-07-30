@@ -4,7 +4,7 @@ const isString = (text) => {
   return typeof text === 'string' || text instanceof String
 }
 
-const getWeather = async (location) => {
+const getWeather = async (location, signal) => {
   if (!location) {
     throw new Error(`No location set: ${location}`)
   }
@@ -12,14 +12,15 @@ const getWeather = async (location) => {
   const { latitude, longitude } = location
 
   const options = {
+    signal,
     params: {
-      latt: Math.round(latitude),
-      long: Math.round(longitude),
+      lat: Math.round(latitude),
+      lon: Math.round(longitude),
     },
   }
 
   const { data } = await axios.get('/weather/', options)
-  return toWeatherArray(data.consolidated_weather)
+  return toWeatherArray(data.dataseries)
 }
 
 const toWeatherArray = (weatherArray) => {
@@ -36,23 +37,13 @@ const toWeather = (object) => {
   }
 
   const weather = {
-    id: parseId(object.id),
-    date: parseDate(object.applicable_date),
-    name: parseName(object.weather_state_name),
-    type: parseType(object.weather_state_abbr),
-    temp: parseTemp(object.the_temp),
-    wind: parseWind(object.wind_speed),
+    date: parseDate(object.date),
+    type: parseType(object.weather),
+    temp: parseTemp(object.temp2m.max),
+    wind: parseWind(object.wind10m_max),
   }
 
   return weather
-}
-
-const parseId = (id) => {
-  if (!id || !Number.isInteger(id)) {
-    throw new Error(`Incorrect or missing id: ${String(id)}`)
-  }
-
-  return id
 }
 
 const parseDate = (date) => {
@@ -60,16 +51,21 @@ const parseDate = (date) => {
   if (!date) {
     throw new Error(`Incorrect or missing date: ${String(date)}`)
   }
+  const dateString = String(date)
+  const year = dateString.slice(0, 4)
+  const day = dateString.slice(4, 6)
+  const month = dateString.slice(6, 8)
 
-  return date
+  return new Date(`${day}-${month}-${year}`).toDateString()
 }
 
-const parseName = (name) => {
-  if (!name || !isString(name)) {
-    throw new Error(`Incorrect or missing name: ${String(name)}`)
+const getType = (type) => {
+  switch (type) {
+    case 'lightrain':
+      return 'rain'
+    default:
+      return type
   }
-
-  return name
 }
 
 const parseType = (type) => {
@@ -77,7 +73,7 @@ const parseType = (type) => {
     throw new Error(`Incorrect or missing type: ${String(type)}`)
   }
 
-  return type
+  return getType(type)
 }
 
 const parseTemp = (temp) => {

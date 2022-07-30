@@ -25,7 +25,7 @@ const Recommendation = ({ temp, type, wind }) => {
   return (
     <div className="recommendation">
       <ul>
-        {type !== ('c' || 'hc' || 'lc') && <li>Wear a coat</li>}
+        {!['clear', 'cloudy', 'pcloudy'].includes(type) && <li>Wear a coat</li>}
         {temp > 18 && <li>Consider some shorts, sunglasses and sunscreen</li>}
         {temp < 10 && <li>Wrap up warm</li>}
         {wind > 8 && <li>Avoid a hat or an umbrella</li>}

@@ -3,16 +3,17 @@ const router = express.Router()
 const axios = require('axios')
 const { weatherUrl } = require('../utils/consts')
 
-router.get('/',  async (req, res) => {
-  const { latt, long } = req.query
+router.get('/', async (req, res) => {
+  const { lat, lon } = req.query
 
-  if (!latt || !long) {
-    res.status(400).send(`Missing lattlong: ${JSON.stringify(req.query)}`)
+  if (!lat || !lon) {
+    res.status(400).send(`Missing lat or lon: ${JSON.stringify(req.query)}`)
   }
 
   try {
-    const locations = await axios.get(`${weatherUrl}/search/?lattlong=${latt},${long}`)
-    const weather = await axios.get(`${weatherUrl}/${locations.data[0].woeid}`)
+    const weather = await axios.get(weatherUrl, {
+      params: { lon, lat, output: 'json', unit: 'metric' },
+    })
     res.send(weather.data)
   } catch (error) {
     res.status(404).send(`Something went wrong: ${JSON.stringify(error)}`)

@@ -17,7 +17,7 @@ const Footer = () => (
       <p>
         Thanks to{' '}
         <a href={weatherProvider} alt="Weather API provider">
-          Meta Weather
+          7timer
         </a>{' '}
         for providing an easy to use free weather API.
       </p>

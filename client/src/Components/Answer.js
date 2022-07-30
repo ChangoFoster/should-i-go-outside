@@ -2,15 +2,15 @@ import React from 'react'
 
 import useWeather from '../Utils/useWeather'
 
-import Recommendation from './Recommendation'
+import WeatherBox from './WeatherBox'
 
 const Answer = () => {
-  const { today } = useWeather()
+  const { loading, today } = useWeather()
 
   return (
     <div className="answer">
       <h1>Yes!</h1>
-      <Recommendation {...today} />
+      {!loading && <WeatherBox {...today} />}
     </div>
   )
 }

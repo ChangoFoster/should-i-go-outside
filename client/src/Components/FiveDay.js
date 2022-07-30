@@ -15,7 +15,7 @@ const FiveDay = () => {
       <h2>Should I go for a walk this week?</h2>
       <div className="fiveDay">
         {fiveDay.map((day) => (
-          <WeatherBox {...day} key={day.id} />
+          <WeatherBox {...day} key={day.date} />
         ))}
       </div>
     </div>

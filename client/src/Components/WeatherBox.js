@@ -12,9 +12,9 @@ const WeatherBox = (day) => {
     <div className="weatherBox">
       <h3>{day.date}</h3>
       <Recommendation {...day} />
-      <img src={`${imgUrl}/${day.type}.svg`} alt={day.name} />
+      {day.type && <img src={`${imgUrl}${day.type}.png`} alt={day.type} />}
       <p>
-        {day.name} {Math.round(day.temp)}&ordm;C
+        {day.type} {Math.round(day.temp)}&ordm;C
       </p>
       <p>{Math.round(day.wind)} mph winds</p>
     </div>

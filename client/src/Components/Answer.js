@@ -9,8 +9,10 @@ const Answer = () => {
 
   return (
     <div className="answer">
-      <h1>Yes!</h1>
-      {!loading && <WeatherBox {...today} />}
+      <div>
+        <h1>Yes!</h1>
+        {!loading && <WeatherBox {...today} />}
+      </div>
     </div>
   )
 }

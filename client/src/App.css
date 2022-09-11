@@ -55,7 +55,6 @@ main {
   flex-direction: column;
   flex-wrap: wrap;
   justify-content: center;
-  height: 90vh;
 }
 
 .mentalHealth {

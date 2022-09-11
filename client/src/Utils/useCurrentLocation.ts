@@ -1,32 +1,40 @@
 import { useState, useEffect, useMemo, useCallback } from 'react'
 
 const useCurrentLocation = () => {
-  const [error, setError] = useState()
-  const [location, setLocation] = useState()
+  const [error, setError] = useState<string | undefined>()
+  const [location, setLocation] = useState<
+    { latitude: number; longitude: number } | undefined
+  >()
   const [locationEnabled, setLocationEnabled] = useState(false)
   const [permissionDesc, setPermissionDesc] = useState('denied')
 
-  const options = useMemo(() => ({
-    enableHighAccuracy: false,
-    timeout: 1000 * 60 * 1, // 1 min (1000 ms * 60 sec * 1 minute = 60 000ms)
-    maximumAge: 1000 * 3600 * 24, // 24 hour
-  }), [])
+  const options = useMemo(
+    () => ({
+      enableHighAccuracy: false,
+      timeout: 1000 * 60 * 1, // 1 min (1000 ms * 60 sec * 1 minute = 60 000ms)
+      maximumAge: 1000 * 3600 * 24, // 24 hour
+    }),
+    []
+  )
 
-  const handleSuccess = useCallback((position) => {
+  const handleSuccess = useCallback((position: GeolocationPosition) => {
     if (position?.coords) {
       const { latitude, longitude } = position.coords
       setLocation({ latitude, longitude })
     }
   }, [])
 
-  const handleError = useCallback((error) => {
+  const handleError = useCallback((error: GeolocationPositionError) => {
     setError(error?.message)
   }, [])
 
-  const handleUpdateLocation = useCallback((state) => {
-    setLocationEnabled(state === 'granted' ? true : false)
-    setPermissionDesc(state)
-  }, [])
+  const handleUpdateLocation = useCallback(
+    (state: PermissionStatus['state']) => {
+      setLocationEnabled(state === 'granted' ? true : false)
+      setPermissionDesc(state)
+    },
+    []
+  )
 
   const getLocation = useCallback(() => {
     navigator.geolocation.getCurrentPosition(

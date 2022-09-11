@@ -5,7 +5,7 @@ const MentalHealth = () => (
   <div className="mentalHealth">
     <p>
       Mental health is important and going for a walk can{' '}
-      <a href={mentalHealthUrl} alt="mental health resource">
+      <a href={mentalHealthUrl}>
         help keep you mentally fit
       </a>
       . Stick to your local COVID rules. We will get through this.

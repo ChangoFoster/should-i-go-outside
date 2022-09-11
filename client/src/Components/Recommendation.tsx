@@ -3,7 +3,13 @@ import propTypes from 'prop-types'
 
 import useWeather from '../Utils/useWeather'
 
-const Recommendation = ({ temp, type, wind }) => {
+type RecommendationProps = {
+  temp: number;
+  type: string;
+  wind: number;
+}
+
+const Recommendation = ({ temp, type, wind }: RecommendationProps) => {
   const { loading, locationEnabled } = useWeather()
 
   if (loading) {

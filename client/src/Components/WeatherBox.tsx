@@ -3,7 +3,14 @@ import { imgUrl } from '../Utils/consts'
 
 import Recommendation from './Recommendation'
 
-const WeatherBox = (day) => {
+type WeatherBoxProps = {
+  date: string;
+  temp: number;
+  type: string;
+  wind: number;
+}
+
+const WeatherBox = (day: WeatherBoxProps) => {
   if (!day) {
     return null
   }

@@ -4,7 +4,7 @@ module.exports = {
     es2021: true,
     node: true,
     es6: true,
-    'jest/globals': true
+    'jest/globals': true,
   },
   extends: [
     'eslint:recommended',
@@ -13,16 +13,15 @@ module.exports = {
   ],
   overrides: [
     {
-      files: [
-        '**/*.test.js'
-      ],
+      files: ['**/*.test.js'],
       extends: [
         'plugin:jest/recommended',
         'plugin:jest/style',
-        'plugin:jest/all'
-      ]
-    }
+        'plugin:jest/all',
+      ],
+    },
   ],
+  parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaFeatures: {
       jsx: true,
@@ -52,6 +51,7 @@ module.exports = {
         after: true,
       },
     ],
+    'no-undef': 'off',
   },
   settings: {
     react: {

@@ -9,14 +9,14 @@ const Footer = () => (
     <small>
       <p>
         Developed by{' '}
-        <a href={githubProfile} alt="Developer github page">
+        <a href={githubProfile}>
           ChangoFoster
         </a>
         .
       </p>
       <p>
         Thanks to{' '}
-        <a href={weatherProvider} alt="Weather API provider">
+        <a href={weatherProvider}>
           7timer
         </a>{' '}
         for providing an easy to use free weather API.

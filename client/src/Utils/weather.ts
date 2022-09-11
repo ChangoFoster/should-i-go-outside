@@ -1,10 +1,13 @@
 import axios from 'axios'
 
-const isString = (text) => {
+const isString = (text: unknown) => {
   return typeof text === 'string' || text instanceof String
 }
 
-const getWeather = async (location, signal) => {
+const getWeather = async (
+  location: { latitude: number; longitude: number },
+  signal: AbortSignal
+) => {
   if (!location) {
     throw new Error(`No location set: ${location}`)
   }
@@ -23,7 +26,7 @@ const getWeather = async (location, signal) => {
   return toWeatherArray(data.dataseries)
 }
 
-const toWeatherArray = (weatherArray) => {
+const toWeatherArray = (weatherArray: any[]) => {
   if (!Array.isArray(weatherArray)) {
     throw new Error(`Weather is not an array: ${String(weatherArray)}`)
   }
@@ -31,27 +34,27 @@ const toWeatherArray = (weatherArray) => {
   return weatherArray.map((weather) => toWeather(weather))
 }
 
-const toWeather = (object) => {
+const toWeather = (object: any) => {
   if (!object) {
     throw new Error(`Weather missing key attributes: ${String(object)}`)
   }
 
   const weather = {
-    date: parseDate(object.date),
-    type: parseType(object.weather),
-    temp: parseTemp(object.temp2m.max),
-    wind: parseWind(object.wind10m_max),
+    date: parseDate(object?.date),
+    type: parseType(object?.weather),
+    temp: parseTemp(object?.temp2m?.max),
+    wind: parseWind(object?.wind10m_max),
   }
 
   return weather
 }
 
-const parseDate = (date) => {
+const parseDate = (date: unknown) => {
   // Add additional date checks here
   if (!date) {
     throw new Error(`Incorrect or missing date: ${String(date)}`)
   }
-  console.log(date)
+
   const dateString = String(date)
   const year = dateString.slice(0, 4)
   const month = dateString.slice(4, 6)
@@ -60,7 +63,7 @@ const parseDate = (date) => {
   return new Date(`${year}-${month}-${day}`).toDateString()
 }
 
-const getType = (type) => {
+const getType = (type: string) => {
   switch (type) {
     case 'lightrain':
       return 'rain'
@@ -69,15 +72,15 @@ const getType = (type) => {
   }
 }
 
-const parseType = (type) => {
+const parseType = (type: unknown) => {
   if (!type || !isString(type)) {
     throw new Error(`Incorrect or missing type: ${String(type)}`)
   }
 
-  return getType(type)
+  return getType(type as string)
 }
 
-const parseTemp = (temp) => {
+const parseTemp = (temp: unknown) => {
   if (!temp || Number.isNaN(Number(temp))) {
     throw new Error(`Incorrect or missing temo: ${String(temp)}`)
   }
@@ -85,7 +88,7 @@ const parseTemp = (temp) => {
   return Number(temp)
 }
 
-const parseWind = (wind) => {
+const parseWind = (wind: unknown) => {
   if (!wind || Number.isNaN(Number(wind))) {
     throw new Error(`Incorrect or missing wind: ${Number(wind)}`)
   }

@@ -11,7 +11,7 @@ const Answer = () => {
     <div className="answer">
       <div>
         <h1>Yes!</h1>
-        {!loading && <WeatherBox {...today} />}
+        {!loading && today && <WeatherBox {...today} />}
       </div>
     </div>
   )

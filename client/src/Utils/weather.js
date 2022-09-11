@@ -51,12 +51,13 @@ const parseDate = (date) => {
   if (!date) {
     throw new Error(`Incorrect or missing date: ${String(date)}`)
   }
+  console.log(date)
   const dateString = String(date)
   const year = dateString.slice(0, 4)
-  const day = dateString.slice(4, 6)
-  const month = dateString.slice(6, 8)
+  const month = dateString.slice(4, 6)
+  const day = dateString.slice(6, 8)
 
-  return new Date(`${day}-${month}-${year}`).toDateString()
+  return new Date(`${year}-${month}-${day}`).toDateString()
 }
 
 const getType = (type) => {

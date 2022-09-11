@@ -90,9 +90,8 @@ img {
   text-align:center;
 }
 
-.recommendationWrapper {
-  padding: 1rem;
-  max-width: 40vw;
+.recommendation {
+  max-width: 18rem;
 }
 
 .weatherBox {
@@ -101,6 +100,7 @@ img {
   align-items: center;
   margin: 1rem;
   padding: 1rem;
+  min-width: 18rem;
 }
 
 ul {

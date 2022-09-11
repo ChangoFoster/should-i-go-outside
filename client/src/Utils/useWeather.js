@@ -35,6 +35,7 @@ export const WeatherProvider = (props) => {
       try {
         setLoading(true)
         const weather = await weatherService.getWeather(currentLocation, signal)
+        console.log(weather)
         setToday(weather[0])
         setFiveDay(weather)
         setLoading(false)

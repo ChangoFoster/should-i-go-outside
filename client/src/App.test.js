@@ -44,17 +44,15 @@ describe('tests', () => {
     expect.assertions(2)
 
     setupNavigationSuccess()
-    const promise = Promise.resolve()
 
     setup()
 
-    expect(screen.getByText('Yes!')).toBeInTheDocument()
-    expect(
-      screen.getByText(
-        'Allow location access we will tell you what its like out there'
-      )
-    ).toBeInTheDocument()
-    await act(() => promise)
+      expect(screen.getByText('Yes!')).toBeInTheDocument()
+      expect(
+        await screen.queryByText(
+          'Allow location access we will tell you what its like out there'
+        )
+      ).not.toBeInTheDocument()
   })
 
   it('when fail, says yes', async () => {
@@ -66,8 +64,8 @@ describe('tests', () => {
 
     expect(screen.getByText('Yes!')).toBeInTheDocument()
     expect(
-      screen.getByText(
-        'Allow location access we will tell you what its like out there'
+      await screen.findByText(
+        'Location info has been blocked. Update your settings if you want to see the weather.'
       )
     ).toBeInTheDocument()
   })

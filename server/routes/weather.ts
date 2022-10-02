@@ -1,7 +1,8 @@
-const express = require('express')
+import express from 'express'
+import axios from 'axios'
+import  { weatherUrl } from '../utils/consts'
+
 const router = express.Router()
-const axios = require('axios')
-const { weatherUrl } = require('../utils/consts')
 
 router.get('/', async (req, res) => {
   const { lat, lon } = req.query
@@ -20,4 +21,4 @@ router.get('/', async (req, res) => {
   }
 })
 
-module.exports = router
+export default router

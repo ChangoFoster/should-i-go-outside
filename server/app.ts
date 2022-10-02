@@ -1,13 +1,13 @@
-const createError = require('http-errors')
-const express = require('express')
-const path = require('path')
-const cookieParser = require('cookie-parser')
-const logger = require('morgan')
-const cors = require('cors')
-const helmet = require('helmet')
+import createError from 'http-errors'
+import express, {Request, Response} from 'express'
+import path from 'path'
+import cookieParser from 'cookie-parser'
+import logger from 'morgan'
+import cors from 'cors'
+import helmet from 'helmet'
 
-const pingRouter = require('./routes/ping')
-const weatherRouter = require('./routes/weather')
+import pingRouter from './routes/ping'
+import weatherRouter from './routes/weather'
 
 const app = express()
 app.use(
@@ -38,7 +38,7 @@ app.use('/ping', pingRouter)
 app.use('/weather', weatherRouter)
 
 app.get('*', (_req, res) => {
-  res.sendFile(path.json(__dirname, '..', 'client', 'build', 'index.html'))
+  res.sendFile(path.join(__dirname, '..', 'client', 'build', 'index.html'))
 })
 
 // catch 404 and forward to error handler
@@ -47,7 +47,7 @@ app.use(function (_req, _res, next) {
 })
 
 // error handler
-app.use((err, req, res) => {
+app.use((err: any, req: Request, res: Response) => {
   // set locals, only providing error in development
   res.locals.message = err.message
   res.locals.error = req.app.get('env') === 'development' ? err : {}
@@ -56,4 +56,4 @@ app.use((err, req, res) => {
   res.render('error')
 })
 
-module.exports = app
+export default app

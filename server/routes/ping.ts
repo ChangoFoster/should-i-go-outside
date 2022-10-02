@@ -1,11 +1,10 @@
-const express = require('express')
+import express from 'express'
+
 const router = express.Router()
 
 /* GET home page. */
 router.get('/ping', function(_req, res) {
-  res.send('disco')
+  res.send('hello')
 })
 
-
-
-module.exports = router
+export default router

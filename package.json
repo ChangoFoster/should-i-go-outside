@@ -2,7 +2,7 @@
   "name": "should-i-go-outside",
   "version": "1.0.0",
   "description": "",
-  "main": "/server/index.ts",
+  "main": "/server/index.js",
   "scripts": {
     "test": "npm --prefix client run test",
     "start": "npm --prefix server run start",

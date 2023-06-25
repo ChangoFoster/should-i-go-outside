@@ -1,6 +1,6 @@
 export interface WeatherType {
   date: string
-  type: any
+  type: string
   temp: number
   wind: number
 }

@@ -26,7 +26,7 @@ const getWeather = async (
   return toWeatherArray(data.dataseries)
 }
 
-const toWeatherArray = (weatherArray: any[]) => {
+const toWeatherArray = (weatherArray: unknown[]) => {
   if (!Array.isArray(weatherArray)) {
     throw new Error(`Weather is not an array: ${String(weatherArray)}`)
   }
@@ -34,6 +34,7 @@ const toWeatherArray = (weatherArray: any[]) => {
   return weatherArray.map((weather) => toWeather(weather))
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const toWeather = (object: any) => {
   if (!object) {
     throw new Error(`Weather missing key attributes: ${String(object)}`)

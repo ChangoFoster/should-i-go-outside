@@ -23,11 +23,6 @@
     "lint": "eslint .",
     "types": "tsc --noEmit"
   },
-  "eslintConfig": {
-    "extends": [
-      "react-app"
-    ]
-  },
   "browserslist": {
     "production": [
       ">0.2%",

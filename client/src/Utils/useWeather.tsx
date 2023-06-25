@@ -10,7 +10,7 @@ interface ContextState {
   loading: boolean
   error?: string
   locationEnabled: boolean
-  getLocation: () => any
+  getLocation: () => void
   permissionDesc: string
 }
 

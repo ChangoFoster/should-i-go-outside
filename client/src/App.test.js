@@ -40,26 +40,24 @@ const setup = () => {
 }
 
 describe('tests', () => {
-  it('when success, says yes', async () => {
+  it('when success, says yes', () => {
     expect.assertions(2)
 
     setupNavigationSuccess()
-
     setup()
 
-      expect(screen.getByText('Yes!')).toBeInTheDocument()
-      expect(
-        await screen.queryByText(
-          'Allow location access we will tell you what its like out there'
-        )
-      ).not.toBeInTheDocument()
+    expect(screen.getByText('Yes!')).toBeInTheDocument()
+    expect(
+      screen.queryByText(
+        'Allow location access we will tell you what its like out there'
+      )
+    ).not.toBeInTheDocument()
   })
 
   it('when fail, says yes', async () => {
     expect.assertions(2)
 
     setupNavigationFail()
-
     setup()
 
     expect(screen.getByText('Yes!')).toBeInTheDocument()

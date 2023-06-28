@@ -10,6 +10,7 @@ const FiveDay = () => {
   if (!fiveDay || !locationEnabled) {
     return null
   }
+
   return (
     <div className="fiveDayWrapper">
       <h2>Should I go for a walk this week?</h2>

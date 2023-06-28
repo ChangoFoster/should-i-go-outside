@@ -66,7 +66,7 @@ export const WeatherProvider = ({ children }: WeatherProviderProps): JSX.Element
       setError(undefined)
       setFiveDay(undefined)
     }
-  }, [currentLocation])
+  }, [currentLocation, locationEnabled])
 
   return (
     <WeatherContext.Provider

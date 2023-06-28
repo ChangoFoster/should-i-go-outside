@@ -1,6 +1,11 @@
-body {
+html,
+body,
+body>div,
+.App {
   margin: 0;
   font-family: Helvetica, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  height: 100%;
+  width: 100%;
 }

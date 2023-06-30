@@ -1,28 +1,9 @@
-.theme_1 {
-  background-color: white;
-  color: black;
-}
-
-.theme_2 {
-  background-color: #238423;
-  color: white;
-}
 .theme_2 a:any-link {
   color: deepskyblue;
 }
 
-.theme_3 {
-  background-color: black;
-  color:white;
-}
-
 .theme_3 a:any-link {
   color: violet;
-}
-
-.theme_4 {
-  background-color: #64319A;
-  color: white;
 }
 
 .theme_4 a:any-link {

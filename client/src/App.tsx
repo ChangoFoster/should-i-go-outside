@@ -1,4 +1,4 @@
-import React, { Suspense, useEffect } from 'react'
+import React, { Suspense, useEffect, useMemo } from 'react'
 import './App.css'
 
 import Answer from './Components/Answer'
@@ -31,7 +31,7 @@ const colors = [{
 
 const App = () => {
   const { fiveDay, locationEnabled, loading, today } = useWeather()
-  const theme = colors[Math.floor(Math.random() * colors.length)]
+  const theme = useMemo(() => colors[Math.floor(Math.random() * colors.length)], [])
 
   useEffect(() => {
     document.body.style.backgroundColor = theme.backgroundColor

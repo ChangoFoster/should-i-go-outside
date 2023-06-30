@@ -1,17 +1,16 @@
 import React from 'react'
 import propTypes from 'prop-types'
 
-import useWeather from '../Utils/useWeather'
 
 type RecommendationProps = {
+  loading: boolean;
+  locationEnabled: boolean;
   temp: number;
   type: string;
   wind: number;
 }
 
-const Recommendation = ({ temp, type, wind }: RecommendationProps) => {
-  const { loading, locationEnabled } = useWeather()
-
+const Recommendation = ({ loading, locationEnabled, temp, type, wind }: RecommendationProps) => {
   if (loading) {
     return (
       <div className="recommendaton">

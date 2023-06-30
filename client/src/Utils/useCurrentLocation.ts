@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo, useCallback } from 'react'
+import { useState, useMemo, useCallback, useEffect } from 'react'
 
 const useCurrentLocation = () => {
   const [error, setError] = useState<string | undefined>()
@@ -6,7 +6,9 @@ const useCurrentLocation = () => {
     { latitude: number; longitude: number } | undefined
   >()
   const [locationEnabled, setLocationEnabled] = useState(false)
-  const [permissionDesc, setPermissionDesc] = useState('denied')
+  const [permissionDesc, setPermissionDesc] = useState<string | undefined>(
+    undefined
+  )
 
   const options = useMemo(
     () => ({
@@ -21,19 +23,28 @@ const useCurrentLocation = () => {
     if (position?.coords) {
       const { latitude, longitude } = position.coords
       setLocation({ latitude, longitude })
+      setLocationEnabled(true)
     }
   }, [])
 
   const handleError = useCallback((error: GeolocationPositionError) => {
     setError(error?.message)
+    if (error.code === 1) {
+      setPermissionDesc('denied')
+      setLocationEnabled(false)
+      setLocation(undefined)
+    }
   }, [])
 
   const handleUpdateLocation = useCallback(
     (state: PermissionStatus['state']) => {
-      setLocationEnabled(state === 'granted' ? true : false)
-      setPermissionDesc(state)
+      const hasPermission = state === 'granted'
+      const hasTemporaryPermission =
+        !!location && state === 'prompt' && permissionDesc !== 'denied'
+
+      setLocationEnabled(hasPermission || hasTemporaryPermission ? true : false)
     },
-    []
+    [location, permissionDesc]
   )
 
   const getLocation = useCallback(() => {
@@ -45,22 +56,29 @@ const useCurrentLocation = () => {
   }, [handleError, handleSuccess, options])
 
   useEffect(() => {
-    navigator.permissions.query({ name: 'geolocation' }).then((result) => {
-      handleUpdateLocation(result?.state)
-      result.onchange = () => {
-        handleUpdateLocation(result?.state)
-      }
-    })
+    const getPermissions = async () => {
+      const permissions = await navigator.permissions.query({
+        name: 'geolocation',
+      })
 
-    return () => {
-      setLocationEnabled(false)
-      setPermissionDesc('denied')
+      if (permissions?.state !== permissionDesc) {
+        handleUpdateLocation(permissions?.state)
+      }
+
+      if (!permissionDesc) {
+        setPermissionDesc(permissions?.state)
+      }
     }
+
+    getPermissions()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [handleUpdateLocation])
 
   useEffect(() => {
-    if (locationEnabled) getLocation()
-  }, [locationEnabled, getLocation])
+    if (permissionDesc === 'granted') {
+      getLocation()
+    }
+  }, [getLocation, permissionDesc])
 
   return {
     error,

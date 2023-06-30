@@ -1,12 +1,9 @@
 import React from 'react'
 
-import useWeather from '../Utils/useWeather'
-
 import WeatherBox from './WeatherBox'
+import { WeatherType } from '../Utils/types'
 
-const FiveDay = () => {
-  const { fiveDay, locationEnabled } = useWeather()
-
+const FiveDay = ({ fiveDay, loading, locationEnabled }: { fiveDay?: WeatherType[], locationEnabled: boolean, loading: boolean }) => {
   if (!fiveDay || !locationEnabled) {
     return null
   }
@@ -16,7 +13,7 @@ const FiveDay = () => {
       <h2>Should I go for a walk this week?</h2>
       <div className="fiveDay">
         {fiveDay.map((day) => (
-          <WeatherBox {...day} key={day.date} />
+          <WeatherBox {...day} loading={loading} locationEnabled={locationEnabled} key={day.date} />
         ))}
       </div>
     </div>

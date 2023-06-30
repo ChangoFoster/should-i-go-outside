@@ -4,10 +4,10 @@ const isString = (text: unknown) => {
   return typeof text === 'string' || text instanceof String
 }
 
-const getWeather = async (
-  location: { latitude: number; longitude: number },
-  signal: AbortSignal
-) => {
+const getWeather = async (location: {
+  latitude: number
+  longitude: number
+}) => {
   if (!location) {
     throw new Error(`No location set: ${location}`)
   }
@@ -15,7 +15,6 @@ const getWeather = async (
   const { latitude, longitude } = location
 
   const options = {
-    signal,
     params: {
       lat: Math.round(latitude),
       lon: Math.round(longitude),

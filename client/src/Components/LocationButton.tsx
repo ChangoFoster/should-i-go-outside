@@ -4,7 +4,6 @@ import useWeather from '../Utils/useWeather'
 
 const LocationButton = () => {
   const { locationEnabled, getLocation, permissionDesc } = useWeather()
-
   if (locationEnabled) {
     return null
   }

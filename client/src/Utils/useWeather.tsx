@@ -11,12 +11,10 @@ interface ContextState {
   error?: string
   locationEnabled: boolean
   getLocation: () => void
-  permissionDesc: string
+  permissionDesc?: string
 }
 
 const WeatherContext = React.createContext<ContextState | null>(null)
-let controller: AbortController | undefined
-
 
 type WeatherProviderProps = { children: React.ReactNode }
 
@@ -33,22 +31,16 @@ export const WeatherProvider = ({ children }: WeatherProviderProps): JSX.Element
   const [error, setError] = useState<string | undefined>()
 
   useEffect(() => {
-    if (!currentLocation) {
-      return
-    }
-
-    if (controller) {
-      controller.abort()
+    if (!currentLocation || !locationEnabled) {
       return
     }
 
     const fetchWeather = async () => {
-      controller = new AbortController()
-      const signal = controller.signal
-
       try {
         setLoading(true)
-        const weather = await weatherService.getWeather(currentLocation, signal)
+
+        const weather = await weatherService.getWeather(currentLocation)
+
         setToday(weather[0])
         setFiveDay(weather)
         setLoading(false)

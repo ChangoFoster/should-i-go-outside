@@ -8,6 +8,8 @@ import MentalHealth from './Components/MentalHealth'
 
 const FiveDay = React.lazy(() => import('./Components/FiveDay'))
 
+import useWeather from './Utils/useWeather'
+
 const colors = [{
   theme: 1,
   backgroundColor: 'white',
@@ -28,6 +30,7 @@ const colors = [{
 }]
 
 const App = () => {
+  const { fiveDay, locationEnabled, loading, today } = useWeather()
   const theme = colors[Math.floor(Math.random() * colors.length)]
 
   useEffect(() => {
@@ -37,11 +40,11 @@ const App = () => {
 
   return <div className={`App theme_${theme.theme}`}>
     <main>
-      <Answer />
+      <Answer loading={loading} locationEnabled={locationEnabled} today={today} />
       <LocationButton />
       <MentalHealth />
       <Suspense fallback={null}>
-        <FiveDay />
+        <FiveDay fiveDay={fiveDay} locationEnabled={locationEnabled} loading={loading} />
       </Suspense>
     </main>
     <Footer />

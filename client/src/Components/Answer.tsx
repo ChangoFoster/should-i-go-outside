@@ -1,20 +1,16 @@
 import React from 'react'
 
-import useWeather from '../Utils/useWeather'
-
 import WeatherBox from './WeatherBox'
 
-const Answer = () => {
-  const { loading, today } = useWeather()
+import { WeatherType } from '../Utils/types'
 
-  return (
-    <div className="answer">
-      <div>
-        <h1>Yes!</h1>
-        {!loading && today && <WeatherBox {...today} />}
-      </div>
+const Answer = ({ loading, locationEnabled, today }: { loading: boolean, locationEnabled: boolean, today?: WeatherType }) => (
+  <div className="answer">
+    <div>
+      <h1>Yes!</h1>
+      {!loading && today && <WeatherBox {...today} loading={loading} locationEnabled={locationEnabled} />}
     </div>
-  )
-}
+  </div>
+)
 
 export default Answer

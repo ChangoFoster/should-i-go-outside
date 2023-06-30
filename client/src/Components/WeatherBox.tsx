@@ -5,6 +5,8 @@ import Recommendation from './Recommendation'
 
 type WeatherBoxProps = {
   date: string;
+  loading: boolean;
+  locationEnabled: boolean;
   temp: number;
   type: string;
   wind: number;
